@@ -1,7 +1,7 @@
 version: '2'
 services:
   para:
-    build: lufia/para:latest
+    image: lufia/para:latest
     restart: always
     environment:
       - PARA_APP_NAME=scoold
