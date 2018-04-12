@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   para:
     image: lufia/para:latest
@@ -9,7 +9,7 @@ services:
   parasetup:
     build: ./parasetup
     volumes:
-      - share:/var/lib/para
+      - ./volumes/para:/var/lib/para
     links:
       - para:para
     restart: on-failure
@@ -19,7 +19,7 @@ services:
   scoold:
     image: lufia/scoold:latest
     volumes:
-      - share:/var/lib/para
+      - ./volumes/para:/var/lib/para
     links:
       - para:para
     ports:
@@ -31,10 +31,14 @@ services:
       - PARA_APP_NAME=scoold
       - PARA_PORT=8000
       - PARA_ENV=production
-      - PARA_HOST_URL=http://localhost
+      - PARA_HOST_URL=http://localhost:8000
       - PARA_ENDPOINT=http://para:8080
       - PARA_PASSWORD_AUTH_ENABLED=true
       - PARA_CODE_HIGHLIGHTING_ENABLED=true
-volumes:
-  share:
-    driver: local
+      # - para_support_email=
+      # - para_mail_host=smtp.gmail.com
+      # - para_mail_port=587
+      # - para_mail_username=
+      # - para_mail_password=
+      # - para_mail_tls=true
+      # - para_mail_ssl=false
